@@ -1,0 +1,150 @@
+.site-footer {
+  background: @oc-gray-0;
+  border-top: 1px solid @oc-gray-2;
+  margin-top: 50px;
+
+  .site-description {
+    margin-top: -50px;
+    text-align: center;
+    line-height: 50px;
+    color: @oc-gray-5;
+  }
+
+  .footer-menu {
+    padding: 60px 0 55px;
+    border-bottom: 1px solid @oc-gray-2;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+
+    .give-areward {
+      // float: left;
+      list-style: none;
+      overflow: hidden;
+
+      li {
+        float: left;
+      }
+
+      li:first-of-type {
+        margin-right: 30px;
+      }
+    }
+
+    .give-areward::after {
+      content: "如果我写的内容帮助到了你，请打赏给一些鼓励吧~";
+      display: block;
+      clear: both;
+      padding-top: 10px;
+      color: #969696;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .information {
+      width: 500px;
+      min-width: 500px;
+
+      .friends {
+        list-style: none;
+        overflow: hidden;
+
+        .friend-item {
+          float: left;
+          width: 100px;
+          border-right: 1px solid @oc-gray-5;
+          text-align: center;
+          margin: 9px 0;
+          line-height: 12px;
+          font-size: 12px;
+
+          a {
+            color: @oc-gray-5;
+          }
+
+          a:hover {
+            color: @oc-gray-7;
+            font-weight: 400;
+          }
+        }
+
+        .friend-item:nth-of-type(5n+1) {
+          border-left: 1px solid @oc-gray-5;
+        }
+      }
+    }
+
+    .media-platform {
+      // float: right;
+    }
+  }
+
+  .footer-title {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #646464;
+    font-weight: 700;
+    font-size: 12px;
+  }
+
+  .footer-img {
+    display: block;
+    width: 160px;
+  }
+
+  .footer-info {
+    font-size: 12px;
+    padding: 30px 0 60px;
+
+    .copyright,
+    .icp {
+      list-style: none;
+      text-align: center;
+
+      li {
+        display: inline-block;
+        margin-right: -10px;
+        line-height: 12px;
+        color: @oc-gray-5;
+        padding: 0 10px;
+        border-left: 1px solid @oc-gray-5;
+
+        a {
+          color: @oc-gray-5;
+        }
+
+        a:hover {
+          color: @oc-gray-7;
+        }
+      }
+
+      li:first-child {
+        padding-left: 0;
+        border-left: none;
+      }
+    }
+
+    .icp {
+      margin-top: 10px;
+
+      .public-security {
+        position: relative;
+        padding-left: 35px;
+      }
+
+      .public-security::before {
+        position: absolute;
+        content: "";
+        top: -5px;
+        left: 10px;
+        width: 20px;
+        height: 20px;
+        background: url(../media/images/icon-public-security.png) no-repeat;
+        background-size: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE >
+<html 
+  lang="<%- site.customConfig.lang ? site.customConfig.lang : "en" %>" 
+  data-theme="<%- site.customConfig.theme ? site.customConfig.theme : "light" %>"
+>
+<head>
+  <%- include('./includes/head', { siteTitle: themeConfig.siteName }) %>
+</head>
+<body>
+  <div class="__next">
+    <section class="ant-layout">
+      <!-- 菜单栏 -->
+      <%- include('./includes/header') %>
+      <!-- 内容 -->
+      <main class="ant-layout-content scroll-bar main">
+        <%- include('./includes/post-list') %>
+        <%- include('./includes/pagination') %>
+      </main>
+      <%- include('./includes/small') %>
+    </section>
+    <%- include('./includes/back-top') %> 
+  </div>
+  <!-- <%- include('./includes/load.ejs') %> -->
+</body>
+</html>

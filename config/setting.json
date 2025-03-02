@@ -1,0 +1,30 @@
+{
+  "config": {
+    "branch": "main",
+    "cname": "www.wuai.link",
+    "domain": "https://pengshiwang.github.io",
+    "email": "19843954353@139.com",
+    "enabledProxy": "direct",
+    "netlifyAccessToken": "nfp_wN4Ngo8L9iLH3VwCcrzyRktr8aUcDoW2e209",
+    "netlifySiteId": "d5638024-f9f9-4fb7-a9d6-1eb65962e39f",
+    "platform": "github",
+    "repository": "pengshiwang",
+    "token": "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",
+    "username": "pengshiwang"
+  },
+  "comment": {
+    "commentPlatform": "gitalk",
+    "disqusSetting": {
+      "api": "",
+      "apikey": "",
+      "shortname": ""
+    },
+    "gitalkSetting": {
+      "clientId": "",
+      "clientSecret": "",
+      "owner": "",
+      "repository": ""
+    },
+    "showComment": false
+  }
+}

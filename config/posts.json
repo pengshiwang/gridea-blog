@@ -1,0 +1,433 @@
+{
+  "posts": [
+    {
+      "content": "\n# 常用一些 Git 命令\n\n<VideoLink bvId=\"BV1ZP4y1Q76V\">程序员进厂前必知必会 Git 技巧 | commit 提交规范 | rebase、amend 操作 B 站视频传送门</VideoLink>\n\n<!-- more -->\n\n推荐 mac 用户安装 oh-my-zsh，在这备忘一些常用的命令，以及一些简写方式。\n\n> 以下参考自 [ohmyzsh git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git)\n\n| 简写（Alias） |           对应命令           |                                             详情                                             |\n| :-----------: | :--------------------------: | :------------------------------------------------------------------------------------------: |\n|      gaa      |        git add --all         |                         添加当前项目所有文件修改、增删的文件到缓存区                         |\n|      gb       |          git branch          |                                         查看分支列表                                         |\n|      gc!      |    git commit -v --amend     | 修正上次提交，像 reabase 一样操作，每次提交执行一次，覆盖上一次提交，即可保证只有一个 commit |\n|      gcb      |       git checkout -b        |                                   基于当前分支切换新的分支                                   |\n|      gcp      |       git cherry-pick        |                                 根据 commitId 拿某一次的提交                                 |\n|      gbD      |        git branch -D         |                                           删除分支                                           |\n|     glods     | git log --graph --date=short |                                         查看提交记录                                         |\n|      gpf      |       git push --force       |                               强制推送，一般用于 reabase 之后                                |\n\n## 删除其它分支\n\n这个是我经常会用到的，因为本地开发多次之后，使用 `git branch` 之后会发现有很多分支还在，为了保证「干净卫生」，所以就了解一下，可以执行如下命令。\n\n- 增强命令（master）\n\n> 可以删除除开 master 以外的分支，但类似 `mr/master/xxx` 这样的带有 master 的删除不了。\n\n```sh\ngit stash && git checkout master && git branch | grep -v \"master\" | xargs git branch -D\n```\n\n- 增强命令（main）\n\n> 同上。\n\n```sh\ngit stash && git checkout main && git branch | grep -v \"main\" | xargs git branch -D\n```\n\n- 增强命令（release）\n\n> 同上。\n\n```sh\ngit stash && git checkout release && git branch | grep -v \"release\" | xargs git branch -D\n```\n\n## rebase\n\nrebase 命令很强大，`git rebase -i HEAD~[num]` 和 `git pull --rebase` 等。\n\n> 推荐阅读 [彻底搞懂 Git-Rebase](http://jartto.wang/2018/12/11/git-rebase/)\n\n## 查看完整信息\n\n谁用谁知道！\n\n```sh\ngit reflog\n```\n\n## git commit 提交规范\n\n这里以 coding 工作台为例子，其它代码托管平台可能需要修改一下正则。\n\n<CloudinaryImg publicId='memo/git-regex_klbyot' alt='git-regex'/>\n\n```sh\n^(feat|fix|docs|style|refactor|perf|test|build|revert|merge|chore)(\\(.+\\))?:\\s+(.*)#[0-9]+\\s+|^(Accept Merge Request)\\s+#[0-9]+:\\s+(\\(.+\\s+->\\s+.+\\))\n```\n\n### 书写工具辅助\n\n第一种：\n\n全局安装 `commitizen`，即可使用 `git cz` 命令取代 `git commit`，提供交互式选择界面，协助书写。\n\n```sh\nnpm install -g commitizen cz-conventional-changelog\necho '{ \"path\": \"cz-conventional-changelog\" }' > ~/.czrc\n```\n\n> 参考阅读 [Commit Message](https://coding.net/help/docs/ci/practice/lint/git-commit.html#install)\n\n第二种：\n\n更花哨一点，使用 [git-cz](https://github.com/streamich/git-cz)\n\n<CloudinaryImg publicId='memo/git-cz_nuarae' alt='git-cz'/>\n\n```sh\nnpx git-cz\n\n// or\n\nnpm install -g commitizen\nnpm install --save-dev git-cz\n```\n\n## git stash\n\n平常需要切换分支，但有时候又不想要立即 commit 上去，于是可以通过 `git stash` 备份一下，主要的一些命令如下：\n\n备份当前改动\n\n```sh\ngit stash\n```\n\n查看备份列表\n\n```sh\ngit stash list\n```\n\n恢复备份的改动\n\n```sh\ngit stash pop\n```\n\n> 更多内容可参考 [git-stash 用法小结](https://www.cnblogs.com/tocy/p/git-stash-reference.html)",
+      "data": {
+        "title": "git命令备忘录",
+        "date": "2025-03-01 20:08:51",
+        "tags": [
+          "git"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "\n# 常用一些 Git 命令\n\n<VideoLink bvId=\"BV1ZP4y1Q76V\">程序员进厂前必知必会 Git 技巧 | commit 提交规范 | rebase、amend 操作 B 站视频传送门</VideoLink>",
+      "fileName": "gitmingling"
+    },
+    {
+      "content": "# 如何编写一个API\n<!--more-->\n## 引言\n\n在现代软件开发中，API（应用程序编程接口）是不同软件系统之间进行通信和数据交换的桥梁。本文将介绍如何编写一个简单的API，并以GitHub贡献图为例，展示如何通过API获取数据。\n\n## 什么是API\n\nAPI（应用程序编程接口）是一组定义和协议，用于构建和集成应用软件。API允许不同的软件组件相互通信，使得开发者可以利用现有的功能和服务，而无需从头开始构建。\n\n## 编写一个简单的API\n\n我们将使用Python和Flask框架来编写一个简单的API。Flask是一个轻量级的Web框架，非常适合用于构建小型和中型的API。以下是步骤：\n\n1. 安装Flask：\n    ```bash\n    pip install Flask\n    ```\n\n2. 创建一个简单的Flask应用：\n    ```python\n    from flask import Flask, jsonify\n\n    app = Flask(__name__)\n\n    @app.route('/api/hello', methods=['GET'])\n    def hello_world():\n        return jsonify(message=\"Hello, World!\")\n\n    if __name__ == '__main__':\n        app.run(debug=True)\n    ```\n\n3. 运行应用并访问API：\n    ```bash\n    python app.py\n    ```\n\n    打开浏览器，访问`http://127.0.0.1:5000/api/hello`，你将看到以下输出：\n    ```json\n    {\n        \"message\": \"Hello, World!\"\n    }\n    ```\n\n## GitHub贡献图的例子\n\nGitHub提供了丰富的API，可以用于获取用户的贡献图数据。我们将使用GitHub的REST API来获取某个用户的贡献数据。\n\n1. 获取用户的贡献数据：\n    ```python\n    import requests\n\n    def get_github_contributions(username):\n        url = f\"https://api.github.com/users/{username}/events\"\n        response = requests.get(url)\n        if response.status_code == 200:\n            return response.json()\n        else:\n            return None\n\n    contributions = get_github_contributions(\"octocat\")\n    print(contributions)\n    ```\n\n2. 解析并展示贡献数据：\n    ```python\n    def parse_contributions(events):\n        contributions = {}\n        for event in events:\n            date = event['created_at'][:10]\n            contributions[date] = contributions.get(date, 0) + 1\n        return contributions\n\n    contributions_data = parse_contributions(contributions)\n    for date, count in contributions_data.items():\n        print(f\"{date}: {count} contributions\")\n    ```\n\n## 结论\n\n通过本文的介绍，我们了解了API的基本概念，并通过一个简单的Flask应用展示了如何编写和运行API。此外，我们还通过GitHub的API获取了用户的贡献数据，并进行了简单的解析和展示。希望这些示例能帮助你更好地理解和应用API。",
+      "data": {
+        "title": "如何编写一个api",
+        "date": "2025-01-08 11:05:13",
+        "tags": [
+          "api",
+          "github"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "# 如何编写一个API",
+      "fileName": "github-api"
+    },
+    {
+      "content": "本文主要描写对于typecho框架Handsome主题进行简单美化的教程!\n\n<!--more-->\n\n\n## 1.Handsome主题时光机圆形头像\n\n自定义CSS自定义CSS丨放入后台-外观设置-开发者设置-自定义CSS\n```css\n/* 时光机圆形头像 */\n.img-square {border-radius: 50%;}\n.list-group-item .thumb-sm .img-square {border-radius: 5px;}\n```\n## 2.Handsome主题文章标题居中\n\n自定义CSS自定义CSS丨放入后台-外观设置-开发者设置-自定义CSS\n```css\n/*文章标题居中*/\n.panel h2{\n    text-align: center; \n}\n.panel-small h2{\n    text-align: center; \n}\n.panel-picture h3{\n    text-align: center; \n}\n.post-item-foot-icon{\n    text-align: center;\n}\n```\n## 3.Handsome主题首页新年倒计时\n\n将以下代码添加至后台-开发者设置-首页列表最前方广告位。\n```html\n/*首页倒计时*/\n<style> \n.gn_box{     border: none;     border-radius: 15px; } \n.gn_box {     padding: 10px 14px;     margin: 10px;     margin-bottom: 20px;     text-align: center;     background-color: #fff; } \n#t_d{     color: #982585;     font-size: 18px; } \n#t_h{     color: #8f79c1;     font-size: 18px; } \n#t_m{     color: #65b4b5;     font-size: 18px; } \n#t_s{     color: #83caa3;     font-size: 18px; } \n</style> \n<div class=\"gn_box\">   \n<h1><font color=#E80017>2</font><font color=#D1002E>0</font><font color=#BA0045>2</font><font color=#A3005C>5</font><font  color=#8C0073>年</font><font color=#75008A>-</font>\n<font color=#5E00A1>新</font><font color=#4700B8>年</font><font color=#3000CF>倒</font><font color=#1900E6>计</font><font color=#0200FD>时</font></h1><center>\n<div id=\"CountMsg\" class=\"HotDate\"><span id=\"t_d\"> 天</span><span id=\"t_h\"> 时</span><span id=\"t_m\"> 分</span><span id=\"t_s\"> 秒</span></div></center>\n<script type=\"text/javascript\"> \nfunction getRTime() {   \n    var EndTime = new Date('2021/01/29 00:00:00');  \n    var NowTime = new Date();  \n    var t = EndTime.getTime() - NowTime.getTime();   \n    var d = Math.floor(t / 1000 / 60 / 60 / 24);   \n    var h = Math.floor(t / 1000 / 60 / 60 % 24);   \n    var m = Math.floor(t / 1000 / 60 % 60);   \n    var s = Math.floor(t / 1000 % 60); \n    var day = document.getElementById(\"t_d\");\n    if (day != null) {\n        day.innerHTML = d + \" 天\";   \n    }\n    var hour = document.getElementById(\"t_h\");\n    if (hour != null) {\n        hour.innerHTML = h + \" 时\";  \n    }\n    var min = document.getElementById(\"t_m\");\n    if (min != null) {\n        min.innerHTML = m + \" 分\";   \n    }\n    var sec = document.getElementById(\"t_s\");\n    if (sec != null) {\n        sec.innerHTML = s + \" 秒\";\n    }\n}   \nsetInterval(getRTime, 1000);   \n</script> </div>\n```\n## 4.handsome主题博客信息添加访客数量和网站响应耗时\n\n首先将以下代码加到themes/handsome/libs/Content.php中放在class Content{}之前\n```php\n/*访问总量*/\nfunction theAllViews(){\n$db = Typecho_Db::get();\n$row = $db->fetchAll('SELECT SUM(VIEWS) FROM `typecho_contents`');\necho number_format($row[0]['SUM(VIEWS)']);\n}\n/*响应时间*/\nfunction timer_start() {\nglobal $timestart;\n$mtime = explode( ' ', microtime()  );\n$timestart = $mtime[1] + $mtime[0];\nreturn true; \n}\ntimer_start();\nfunction timer_stop( $display = 0, $precision = 3  ) {\nglobal $timestart, $timeend;\n$mtime = explode( ' ', microtime()  );\n$timeend = $mtime[1] + $mtime[0];\n$timetotal = number_format( $timeend - $timestart, $precision  );\n$r = $timetotal < 1 ? $timetotal * 1000 . \" ms\" : $timetotal . \" s\";\nif ( $display  ) {\necho $r;\n}\nreturn $r;\n}\n```\n然后在/usr/themes/handsome/component/sidebar.php文件内，找到博客信息下面添加以下代码\n```php\n<li class=\"list-group-item text-second\"> <span class=\"blog-info-icons\"> <i data-feather=\"users\"></i></span>\n<span class=\"badge\npull-right\"><?php echo theAllViews();?></span><?php _me(\"访客总数\") ?></li>\n<li class=\"list-group-item text-second\"> <span class=\"blog-info-icons\"> <i data-feather=\"refresh-ccw\"></i></span>\n<span class=\"badge\npull-right\"><?php echo timer_stop();?></span><?php _me(\"响应时间\") ?></li>\n```",
+      "data": {
+        "title": "Handsome主题美化！",
+        "date": "2025-01-08 11:05:13",
+        "tags": [
+          "typecho",
+          "handsome"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "本文主要描写对于typecho框架Handsome主题进行简单美化的教程!",
+      "fileName": "handsome-butterfly"
+    },
+    {
+      "content": "\n本文简单讲述禁止右键、禁止审查元素、禁止复制粘贴等操作，实际使用请根据实际情况修改。\n\n<!--more-->\n\n```shell\n//禁用F12\nwindow.onkeydown = window.onkeyup = window.onkeypress = function (event) {\n    // 判断是否按下F12，F12键码为123\n    if (event.keyCode == 123) {\n    event.preventDefault(); // 阻止默认事件行为\n    window.event.returnValue = false;\n    }\n}\n```\n\n```shell\n//禁用调试工具\nvar threshold = 160; // 打开控制台的宽或高阈值\n// 每秒检查一次\nvar check = setInterval(function() {\n    if (window.outerWidth - window.innerWidth > threshold || \n        window.outerHeight - window.innerHeight > threshold) {\n        // 如果打开控制台，则刷新页面\n        window.location.reload();\n    }\n}, 1000)\n```\n\n```shell\n//屏蔽右键菜单\ndocument.oncontextmenu = function (event){\n    if(window.event){\n    event = window.event;\n    }\n    try{\n    var the = event.srcElement;\n        if (!((the.tagName == \"INPUT\" && the.type.toLowerCase() == \"text\") || the.tagName == \"TEXTAREA\")){\n        return false;\n        }\n        return true;\n    }\n    catch (e){\n        return false;\n    }\n}\n```\n\n```shell\n//屏蔽选中\ndocument.onselectstart = function (event){\n    if(window.event){\n        event = window.event;\n        }\n    try{\n        var the = event.srcElement;\n        if (!((the.tagName == \"INPUT\" && the.type.toLowerCase() == \"text\") || the.tagName == \"TEXTAREA\")){\n        return false;\n        }\n        return true;\n        } \n    catch (e) {\n        return false;\n    }\n}\n```\n\n```shell\n//屏蔽复制\ndocument.oncopy = function (event){\n    if(window.event){\n    event = window.event;\n    }\n    try{\n        var the = event.srcElement;\n        if(!((the.tagName == \"INPUT\" && the.type.toLowerCase() == \"text\") || the.tagName == \"TEXTAREA\")){\n        return false;\n        }\n        return true;\n        }\n    catch (e){\n        return false;\n    }\n}\n```\n\n```shell\n//屏蔽剪贴\ndocument.oncut = function (event){\n    if(window.event){\n    event = window.event;\n    }\n    try{\n        var the = event.srcElement;\n        if(!((the.tagName == \"INPUT\" && the.type.toLowerCase() == \"text\") || the.tagName == \"TEXTAREA\")){\n        return false;\n        }\n        return true;\n        }\n    catch (e){\n        return false;\n    }\n}\n```\n\n```shell\n//屏蔽粘贴\ndocument.onpaste = function (event){\n    if(window.event){\n        event = window.event;\n        }\n    try{\n        var the = event.srcElement;\n        if (!((the.tagName == \"INPUT\" && the.type.toLowerCase() == \"text\") || the.tagName == \"TEXTAREA\")){\n        return false;\n        }\n        return true;\n        }\n    catch (e){\n        return false;\n    }\n}\n```\n",
+      "data": {
+        "title": "网页禁止查看审查元素及复制粘贴",
+        "date": "2025-01-07 13:59:03",
+        "tags": [
+          "禁用"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "\n本文简单讲述禁止右键、禁止审查元素、禁止复制粘贴等操作，实际使用请根据实际情况修改。",
+      "fileName": "noctrlcv"
+    },
+    {
+      "content": "请根据实际情况进行修改，以保证视频框大小合适，仅用于学习参考！\n\n<!--more-->\n\n[源码演示站](https://www.pppp.host/xjj)\n### 一、简介\n本模板是一款简洁而美观的HTML页面，专为看小姐姐而设计。\n\n### 二、使用步骤\n将本HTML源码复制后，在主机空间或服务器内根目录创建一个index.html打开index.html文件进行编辑。\n根据个人需求，修改页面中的内容、样式、文本信息等。\n\n### 三、功能特点\n简洁美观，页面设计简洁\n\n### 代码\n```html\n<html>\n<head>\n<meta charset=\"UTF-8\">\n<style>\n#switch,#next1{\nbackground: #7F9CCC;\ncolor:#fff;\nline-height:40px;\ntext-align:center;\nwidth:100px;\nborder:none;\nmargin:0 6px;\nborder-radius:6px;\nfont-weight:bold;\n}\n</style>\n</head>\n<body>\n<section id=\"main\">\n<video id=\"player\" src=\"https://dwz.mk/MVZVjy\" controls=\"controls\" width=\"100%\" height=\"500px\"></video>\n</section>\n<div style=\"text-align: center;\">\n<section id=\"buttons\">\n<button id=\"switch\">连续: 开</button><button id=\"next1\">换一个</button>\n</section>\n</div>\n\n\n \n<script>\n(function (window, document) {\nif (top != self) {\nwindow.top.location.replace(self.location.href);\n}\nvar get = function (id) {\nreturn document.getElementById(id);\n}\nvar bind = function (element, event, callback) {\nreturn element.addEventListener(event, callback);\n}\nvar auto = true;\nvar player = get('player');\nvar randomm = function () {\nplayer.src = 'http://v.nrzj.vip/video.php?_t=' + Math.random();\nplayer.play();\n}\nbind(get('next1'), 'click', randomm);\nbind(player, 'error', function () {\nrandomm();\n});\nbind(get('switch'), 'click', function () {\nauto = !auto;\nthis.innerText = '连续: ' + (auto ? '开' : '关');\n});\nbind(player, 'ended', function () {\nif (auto) randomm();\n});\n})(window, document);</script>\n<script>var _hmt = _hmt || [];(function() {var hm = document.createElement(\"script\");hm.src = \"\";var s = document.getElementsByTagName(\"script\")[0]; s.parentNode.insertBefore(hm, s);})();</script>\n\n</body>\n</html>\n```",
+      "data": {
+        "title": "随机小姐姐短视频",
+        "date": "2025-01-07 00:00:00",
+        "tags": [
+          "api"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "请根据实际情况进行修改，以保证视频框大小合适，仅用于学习参考！",
+      "fileName": "shuijixjj"
+    },
+    {
+      "content": "\n源码介绍：\n一款简约好看的网站404报错页面HTML源码，仅供参考\n\n<!--more-->\n\n代码\n```html\n<html>\n  <head>\n    <meta charset=\"utf-8\" />\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n    <meta\n      name=\"viewport\"\n      content=\"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no\"\n    />\n    <title>404</title>\n    <style>\n      @media (max-width: 768px) {\n        #app {\n          flex-direction: column;\n        }\n        .svg {\n          padding-left: 0 !important;\n          padding-top: 40px;\n        }\n      }\n      body {\n        background-color: #fff;\n        font-size: 14px;\n        display: flex;\n        align-items: center;\n        justify-content: center;\n      }\n      #app {\n        display: flex;\n      }\n      .text-oops {\n        margin: 0 0 20px 0;\n        font-size: 32px;\n        font-weight: bold;\n        color: 646464;\n        line-height: 1;\n      }\n      .countdown {\n        margin: 0 0 20px 0;\n        font-size: 14px;\n        color: #82899c;\n        line-height: 1;\n      }\n      .svg {\n        padding-left: 100px;\n      }\n      .go2index {\n        transition: all 0.25s;\n        background: #0084ff;\n        border-radius: 2px;\n        color: #fff;\n        padding: 5px 10px;\n        text-decoration: none;\n        cursor: pointer;\n      }\n      .go2index:hover {\n        opacity: 0.8;\n      }\n    </style>\n  </head>\n  <body>\n    <div id=\"app\">\n      <div class=\"text-group\">\n        <p class=\"text-oops\">Oops!被怪兽吞了!</p>\n        <p class=\"countdown\">{{count}}秒后自动跳转至首页</p>\n        <a class=\"go2index\" href=\"/\">去往首页</a>\n      </div>\n      <div class=\"svg\">\n        <svg\n          xmlns=\"http://www.w3.org/2000/svg\"\n          width=\"252\"\n          height=\"172\"\n          viewBox=\"0 0 252 172\"\n        >\n          <g fill=\"none\" fill-rule=\"evenodd\" transform=\"translate(1 1)\">\n            <g transform=\"rotate(-16 289.346 -186.082)\">\n              <path\n                fill=\"#FFF\"\n                stroke=\"#82899C\"\n                stroke-width=\"1.679\"\n                d=\"M64.2337032,50.9554391 C69.326726,50.7301153 71.8363314,53.0862987 71.7625195,58.0239891 C71.6887076,62.9616795 69.1791021,65.1038746 64.2337032,64.4505745\"\n                transform=\"rotate(4 67.999 57.753)\"\n              />\n              <path\n                fill=\"#FFF\"\n                stroke=\"#82899C\"\n                stroke-linejoin=\"round\"\n                stroke-width=\"1.679\"\n                d=\"M40.4237478,14.2180416 L39.1494024,5.45817385 C39.0960088,5.09114582 38.7551898,4.83689484 38.3881618,4.8902884 C38.3208218,4.90008471 38.255362,4.92005907 38.1940247,4.94952722 L28.8945485,9.41725331 C27.5111094,10.0818962 25.8903242,10.0293297 24.5528595,9.27644053 C15.5172392,4.19008529 9.83561966,2.11366589 7.50800104,3.04718233 C3.75154889,4.5537478 2.33572314,10.7572204 4.63065998,15.1880371 C6.16061787,18.1419149 10.3622221,21.5445803 17.2354726,25.3960331 C16.3976472,37.4587981 15.5178022,46.1655322 14.5959374,51.5162354 C13.2131403,59.5422901 12.9424578,65.9460163 22.2564454,68.9810928 C31.5704331,72.0161693 51.7850338,74.4828548 58.4975452,68.9810928 C65.2100565,63.4793308 62.6547443,55.3122756 62.332165,51.5162354 C62.1204691,49.0250454 63.5775047,36.5199594 66.7032718,14.0009773 L66.7032616,14.0009759 C66.7542538,13.6336123 66.4977842,13.2944679 66.1304205,13.2434756 C66.0266946,13.2290779 65.921039,13.2391375 65.8218939,13.272851 L52.8226822,17.6931274 L40.4237478,14.2180416 Z\"\n                transform=\"rotate(-5 35.187 37.538)\"\n              />\n              <path\n                fill=\"#82899C\"\n                d=\"M15.315248,8.44617256 L8.31833154,23.4586328 C3.71393034,20.4664421 1.41172974,16.8935208 1.41172974,12.739869 C1.41172974,6.5093914 5.14666686,5.85407342 7.14956933,5.67077033 C8.48483765,5.54856828 11.2067305,6.47370235 15.315248,8.44617256 Z\"\n              />\n              <ellipse\n                cx=\"41.211\"\n                cy=\"21.612\"\n                fill=\"#82899C\"\n                rx=\"2.57\"\n                ry=\"2.561\"\n              />\n              <path\n                stroke=\"#82899C\"\n                stroke-linecap=\"round\"\n                stroke-width=\"2\"\n                d=\"M14.9620353,36.9897959 C9.4504735,40.7470215 6.58897875,45.5377157 6.37755102,51.3618786\"\n              />\n              <g\n                stroke=\"#82899C\"\n                stroke-linecap=\"round\"\n                stroke-width=\"2\"\n                transform=\"rotate(-10 228.022 -303.247)\"\n              >\n                <polyline\n                  points=\"11.979 17.741 12.821 13.375 16.938 13.816\"\n                  transform=\"rotate(11 14.459 15.558)\"\n                />\n                <path\n                  d=\"M1.2755102,1.906236 C9.50467955,7.60988599 14.5745654,12.4654138 16.4851678,16.4728195\"\n                  transform=\"rotate(8 8.88 9.19)\"\n                />\n              </g>\n              <polyline\n                stroke=\"#82899C\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                stroke-width=\"3\"\n                points=\"47.194 72.704 49.723 88.757 53.062 88.757\"\n              />\n              <polyline\n                stroke=\"#82899C\"\n                stroke-linecap=\"round\"\n                stroke-linejoin=\"round\"\n                stroke-width=\"3\"\n                points=\"38.457 72.704 38.457 88.802 34.439 88.802\"\n              />\n              <polyline\n                stroke=\"#82899C\"\n                stroke-linecap=\"round\"\n                stroke-width=\"2\"\n                points=\"3.827 49.001 7.852 47.194 9.881 50.159\"\n              />\n            </g>\n            <g stroke=\"#525C76\" transform=\"translate(183.673 .075)\">\n              <ellipse\n                cx=\"27.182\"\n                cy=\"25.656\"\n                stroke-width=\"1.6\"\n                rx=\"16.23\"\n                ry=\"16.056\"\n              />\n              <path\n                stroke-linecap=\"round\"\n                stroke-width=\"1.241\"\n                d=\"M43.3673469 10.9754786L46.2032063 8.92857143M40.0898459 38.4901284L42.9686878 41.6553077M11.7576466 39.5408163L7.65306122 42.0095194M11.4210646 9.16590002L8.92857143 6.37755102M27.5774103 0L27.5774103 3.95305288M49.744898 26.2934121L53.9883119 26.2934121M28.1777543 43.0213788L28.1777543 46.6435443M4.7750141 26.2934121L-1.13686838e-13 26.2934121\"\n              />\n            </g>\n            <g stroke=\"#82899C\" transform=\"translate(90.561 37.07)\">\n              <path\n                stroke-width=\"1.3\"\n                d=\"M12.800049,15.5659111 C4.55584222,7.92244512 15.4704843,9.30925816 15.7874228,11.8365084 C16.5864599,18.2079886 -1.59407342,16.7009717 9.76141682,5.31029143 C11.2105717,3.85664573 14.0431581,3.83128988 15.7442578,4.938587 C26.9690273,12.245128 6.70283903,24.0366564 7.0420254,11.1976712 C7.21852245,4.51685113 17.3386508,4.31154035 19.309862,9.72986651 C22.3321026,18.0371882 8.46437643,21.7781905 6.50695995,13.8566412 C3.56093578,1.93425462 20.4151278,5.35464339 19.3961919,11.309848 C15.4161504,34.5713309 -19.1683526,-9.34142036 19.1713745,1.86608396 C35.5190776,6.6448596 15.825887,27.162918 9.45116879,20.2887438 C4.13870945,14.5600559 3.23913308,-3.23699362 15.6237557,4.44710059 C25.0769127,10.3123539 18.548187,21.0571539 11.7389108,16.2047484 L12.800049,15.5659111 Z\"\n              />\n              <path\n                stroke-width=\"1.4\"\n                d=\"M3.04112737,6.07355704 C-9.07798684,18.5193114 19.0238045,24.6852556 17.7340616,14.4883066 C15.6495877,-1.9919345 -2.9168376,15.9500533 5.89630192,22.0265771 C12.2248714,26.3900281 22.9816978,14.4883066 17.7340616,6.07355704 C15.1973589,2.60036767 11.251439,1.69557836 5.89630192,3.35918911 C5.67778781,3.42707204 4.72606296,4.33186135 3.04112737,6.07355704 Z\"\n              />\n            </g>\n            <path\n              fill=\"#FFF\"\n              stroke=\"#525C76\"\n              stroke-width=\"2.4\"\n              d=\"M195.228571,119.956889 L195.228571,72.0283175 C195.228571,66.0636422 190.393247,61.2283175 184.428571,61.2283175 L181.642857,61.2283175 C175.678182,61.2283175 170.842857,66.0636422 170.842857,72.0283175 L170.842857,103.320154 L146.704082,103.320154 C141.015549,103.320154 136.404082,107.931621 136.404082,113.620154 L136.404082,119.956889 C136.404082,125.645422 141.015549,130.256889 146.704082,130.256889 L184.928571,130.256889 C190.617104,130.256889 195.228571,125.645422 195.228571,119.956889 Z\"\n            />\n            <path\n              fill=\"#FFF\"\n              stroke=\"#525C76\"\n              stroke-width=\"2.4\"\n              d=\"M142.932653,146.742603 L142.932653,111.569134 C142.932653,105.604459 138.097328,100.769134 132.132653,100.769134 L128.071429,100.769134 C122.106753,100.769134 117.271429,105.604459 117.271429,111.569134 L117.271429,130.105869 L91.8571429,130.105869 C86.1686099,130.105869 81.5571429,134.717336 81.5571429,140.405869 L81.5571429,146.742603 C81.5571429,152.431136 86.1686099,157.042603 91.8571429,157.042603 L132.632653,157.042603 C138.321186,157.042603 142.932653,152.431136 142.932653,146.742603 Z\"\n              transform=\"matrix(-1 0 0 1 224.49 0)\"\n            />\n            <path\n              stroke=\"#525C76\"\n              stroke-linecap=\"round\"\n              stroke-width=\"2\"\n              d=\"M85.4591837,169.722195 L210.459184,169.722195\"\n            />\n            <path\n              fill=\"#FFF\"\n              stroke=\"#525C76\"\n              stroke-width=\"2.4\"\n              d=\"M117.271429,169.797705 L162.065306,169.797705 L162.065306,69.5997461 C162.065306,60.0452199 154.319832,52.2997461 144.765306,52.2997461 L134.571429,52.2997461 C125.016902,52.2997461 117.271429,60.0452199 117.271429,69.5997461 L117.271429,169.797705 Z\"\n            />\n            <path\n              stroke=\"#525C76\"\n              stroke-linecap=\"round\"\n              stroke-width=\"2\"\n              d=\"M135.204082 95.7426033L135.204082 119.332513M149.234694 140.38546L149.234694 160.148839M184.94898 74.0589298L184.94898 88.089542M178.571429 93.1915829L178.571429 107.222195M89.2857143 109.773216L89.2857143 123.803828M187.5 97.0181135L187.5 122.528318M98.2142857 122.528318L98.2142857 148.038522M127.55102 125.079338L127.55102 152.495778M147.959184 67.6240743L147.959184 124.434554\"\n            />\n            <path\n              fill=\"#FFF\"\n              stroke=\"#525C76\"\n              stroke-linecap=\"round\"\n              stroke-linejoin=\"round\"\n              stroke-width=\"1.5\"\n              d=\"M200.255102 48.5487257C202.872492 35.9661772 206.995705 30.031545 212.62474 30.7448292 221.068292 31.8147555 223.776354 37.4777084 226.049192 40.2865168 228.32203 43.0953253 227.519082 31.4863224 236.05935 33.5536377 241.752863 34.9318479 246.298539 39.9302105 249.696378 48.5487257L200.255102 48.5487257zM1.13686838e-13 43.7132567C2.67727204 30.1851529 7.30742539 23.2974109 13.89046 23.0500307 20.0219959 22.8196171 25.1804054 26.0489035 29.3656887 32.7378899L29.3656699 32.7379016C29.6586216 33.2061016 30.275657 33.3481685 30.743857 33.0552168 30.8889287 32.9644458 31.0082795 32.8379651 31.09049 32.6878764 35.2239365 25.1415895 40.6462732 22.1807285 47.3575001 23.8052936 54.5198529 25.5390611 59.4661454 32.1750488 62.1963776 43.7132567L1.13686838e-13 43.7132567z\"\n            />\n          </g>\n        </svg>\n      </div>\n    </div>\n  </body>\n  <script src=\"https://cdn.bootcss.com/vue/2.5.16/vue.min.js\"></script>\n  <script>\n    var app = new Vue({\n      el: \"#app\",\n      data: {\n        count: 3\n      },\n      methods: {\n        coundown: function() {\n          var _this = this;\n          var timer = setInterval(function() {\n            if (_this.count > 1) {\n              _this.count -= 1;\n            } else {\n              clearInterval(timer);\n              window.location.href = '/'\n            }\n          }, 1000);\n        }\n      },\n      mounted() {\n        this.coundown();\n      }\n    });\n  </script>\n</html>\n```",
+      "data": {
+        "title": "一个好看简约的404报错页面HTML代码",
+        "date": "2025-01-07 00:00:00",
+        "tags": [
+          404,
+          "美化"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "\n源码介绍：\n一款简约好看的网站404报错页面HTML源码，仅供参考",
+      "fileName": "worre-404"
+    },
+    {
+      "content": "最近各大网站都添加了IP属地，本站也介绍一下如果给评论区添加显示IP属地的方法：\n\n<!-- more -->\n\n1，将此代码放入主题的functions.php文件中，可插入在最尾部，也可插入在中间，不知道为什么我插入最尾部，上传到虚拟主机后，用文件管理器打开却看不到，handsome主题是放在functions_mine.php文件中。 [获取评论者地址.txt](https://ltmltm.cn/usr/uploads/2022/05/2033970592.txt)\n\n![图1][1]\n\n2，下载QQWry.Dat放在网站根目录，注意是网站根目录！由于我博客主题是在子目录bk下，所以我把这个文件放到bk根目录下，下载地址：[qqwry.zip](http://pan.ltmltm.cn/f/1643564-582791972-a2277d)\n\n3，打开主题评论模板comments.php文件，在您想显示的位置加上如下代码：<?php echo convertip($comments->ip); ?> handsome主题是添加在大约82-84行位置如下图：\n\n![图2][2]\n\n4，Typecho配置CDN后获取访客真实IP地址可能会受到影响，请在Typecho站点根目录里的config.inc.php添加下面这段代码即可。有的虚拟主机会自带CDN，所以哪怕没有配置CDN，只要不能正常显示，也可以尝试插入以下代码。\n\n```php\n//绕过 CDN 代理IP获取客户真实IP地址\nif(isset($_SERVER['HTTP_X_FORWARDED_FOR']))\n{\n$list = explode(',',$_SERVER['HTTP_X_FORWARDED_FOR']);\n$_SERVER['REMOTE_ADDR'] = $list[0];\n}\n```\n![皓月星际转载][3]\n\n本文转载自：网吧备忘录[博客评论添加IP属地的方法][4]\n\n\n  [1]: https://cdn.shimail.cn/tp/2024-7-21-1.png\n  [2]: https://cdn.shimail.cn/tp/2024-7-21-2.png\n  [3]: https://ltmltm.cn/usr/uploads/2022/05/3789054717.png\n  [4]: https://ltmltm.cn/4878.html",
+      "data": {
+        "title": "typecho博客评论添加IP属地的方法",
+        "date": "2024-07-21 16:19:10",
+        "tags": [
+          "ip"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "最近各大网站都添加了IP属地，本站也介绍一下如果给评论区添加显示IP属地的方法：",
+      "fileName": "typecho博客评论添加IP属地的方法"
+    },
+    {
+      "content": "本文主要是介绍如何在win10或者win11电脑上进行对右键菜单的添加或删除。\n\n<!--more-->\n\n这篇文章也是往后推了好久，原本想着好记性不如个烂笔头，当时就想写一篇文章记录一下，奈何当时有事情耽误了，这一耽误就是将近一个半月。\n\n**右键菜单分为**\n\n1. 在空白处右键（桌面右键）\n2. 在文件上右键\n3. 在文件夹上右键\n   对应的目录地址：\n\n***空白处右键***： `HKEY_CLASSES_ROOT/Directory/background/shell`\n\n***文件夹右键***： `HKEY_CLASSES_ROOT/Directory/shell`\n\n***文件上右键***： `HKEY_CLASSES_ROOT/*/shell`\n\n例如：在文件夹上添加右键菜单项， 添加一个 `sublime`\n首先找到 `HKEY_CLASSES_ROOT/Directory/shell` 目录。\n\n首先右键 `shell` 新建一个名为 `sublime` 的项。（**右键 -> 新建 -> 项**）\n左键单击 `sublime` ， 在右侧空白处右键 **新建 -> 字符串值** 命名为 **`icon`** （必须是icon） 其功能如图所示：\n![请输入图片描述][1]\n\n修改 **（默认）** 和 **`icon`** **右键双击或者单击右键点修改**\n`icon` 的值填 `sublime` 执行文件的地址， 例如我的文件地址：\n\n![请输入图片描述][2]\n\n\n那么在 **`icon` 的值中** 我要填的就是 **D:\\\\worksApp\\\\Sublime Text 3\\\\sublime\\_text.exe**\n\n第二步添加执行程序，\n在 `/shell/sublime` 右键新建 **项** 命名为 **`command`** （必须是这个名字）\n左键点击一下， 在右侧双击。 值填入 **路径 + 空格 + %1**\n如： `D:\\worksApp\\Sublime Text 3\\sublime_text.exe %1`\n![请输入图片描述][3]\n自此已经大功告成。 在其他文件上同理。\n\n\n[参考文章][4]\n\n\n  [1]: https://cdn.shimail.cn/blog/20240524/1.png\n  [2]: https://cdn.shimail.cn/blog/20240524/2.png\n  [3]: https://cdn.shimail.cn/blog/20240524/3.png\n  [4]: https://blog.csdn.net/Mrceel/article/details/107459678",
+      "data": {
+        "title": "给右键文件、文件夹、桌面菜单添加程序（项）",
+        "date": "2024-05-24 16:16:05",
+        "tags": [
+          "右键"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "本文主要是介绍如何在win10或者win11电脑上进行对右键菜单的添加或删除。",
+      "fileName": "给右键文件、文件夹、桌面菜单添加程序（项）"
+    },
+    {
+      "content": "本文主要对typecho的插件进行推荐\n[Handsome主题美化记录][1]\n[给博客添加哔哩哔哩身份及用户等级图标][2]\n[Typecho显示访客用户身份及用户等级][3]\n[Typecho插件UserAgent之Handsome专用][4]\n[修复自建时光机微信公众号发送失败][5]\n[Handsome主题美化记录][6]\n[安利一款Hansome主题专用的UserAgent插件][7]\n[新年将至，Typecho增加纯CSS+HTML实现的两侧喜庆灯笼][8]\n[Typecho评论显示IP归属地插件【适配ipv6】][9]\n[Typecho-Plugin-HandsomeCall][10]\n[本站评论已使用BaiduTextcensor对评论内容进行审核，可一年免费试用5万次][11]\n[handsome主题美化备忘录][12]\n[handsome主题美化及seo优化（二）基于V9.2.0/1][13]\n\n\n  [1]: https://starsei.com/archives/1/\n  [2]: https://www.sicx.top/115.html\n  [3]: https://blog.chrison.cn/work/170.html\n  [4]: https://qninq.cn/archives/uaplugin.html\n  [5]: https://www.sicx.top/90.html\n  [6]: https://starsei.com/archives/1/\n  [7]: https://doge.uk/coding/useragent-modify.html#comments\n  [8]: https://www.52txr.cn/2023/denglong2023.html\n  [9]: https://www.blogbig.cn/archives/iptypechogsd.html\n  [10]: https://github.com/wibus-wee-ac/Typecho-Plugin-HandsomeCall\n  [11]: https://www.52txr.cn/2022/BaiduTextcensor.html\n  [12]: https://www.docn.net/42.html\n  [13]: https://www.docn.net/58.html",
+      "data": {
+        "title": "typecho插件推荐",
+        "date": "2024-05-17 16:03:26",
+        "tags": [
+          "插件"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "hexo-chajian"
+    },
+    {
+      "content": "如何为Hexo博客引入阿里巴巴矢量库\n<!-- more -->\n## 引言\n\n在搭建和美化个人博客时，图标资源是我们经常需要用到的元素。阿里巴巴矢量图标库因其丰富的图标种类和极高的自定义性，深受开发者喜爱。本文将详细介绍如何在你的Hexo博客中引入并使用阿里巴巴矢量图标库。\n## 步骤一：获取图标链接\n首先，访问[阿里巴巴矢量图标库](https://www.iconfont.cn/)，搜索并选择你需要的图标，添加到项目或者购物车，然后点击“下载至本地”。在下载后的文件夹中，你可以找到一个名为 `iconfont.css`的样式文件，这个文件包含了所有你选择图标的CSS样式代码。\n## 步骤二：引入 iconfont.css\n将下载的`iconfont.css`文件上传至你的`Hexo`主题的`source/css/`目录下（如果该目录不存在，请自行创建）。 在你的主题的主要CSS文件（如：`main.css`或`style.styl`等），通过`@import`语句引入`iconfont.css`：\n```markdown\n/* 如果是css文件 */\n@import \"css/iconfont.css\";\n\n/* 如果是stylus文件 */\n@import \"iconfont.styl\";\n```\n\n\n确保路径正确对应你放置 iconfont.css 的位置。\n## 步骤三：在文章或页面中使用图标\n在HTML模板或Markdown文件中，可以使用类名来引用图标。假设你在阿里图标库中选中的图标类名为 .icon-xxx ，则在Markdown文件中插入图标的方式如下：\n```html\n<i class=\"iconfont icon-xxx\"></i>\n```\n\n请将 `icon-xxx`替换为你实际使用的图标类名。\n## 结语\n至此，你已经成功地在你的Hexo博客中引入并使用了阿里巴巴矢量图标库。通过这种方式，你可以轻松定制博客的各个部分，丰富其视觉效果，提升用户体验。\n注意：具体的引入方式可能因不同的Hexo主题而有所差异，请根据实际情况进行适当调整。同时，建议在引入第三方资源时遵循版权协议，合理合法使用。\n\n更完整更加完美的教程，请看店长的[Iconfont Inject](https://akilar.top/posts/d2ebecef/)\n\n",
+      "data": {
+        "title": "为你的博客引入阿里Iconfont图标",
+        "date": "2024-02-01 16:12:11",
+        "tags": [
+          "美化"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "如何为Hexo博客引入阿里巴巴矢量库",
+      "fileName": "为你的博客引入阿里Iconfont图标"
+    },
+    {
+      "content": "给全站添加复制提示弹窗，进站提示弹窗\n\n<!-- more -->\n\n<input  id=\"button\" type=\"button\" value=\"点击查看效果\" onclick=\"buttonClick();\"> \n\n\n## 欢迎弹窗提示页面\n\n新建`hygl.js`\n\n~~~js\nif (GLOBAL_CONFIG.Snackbar) {\n    btf.snackbarShow('欢迎光临')\n}\n~~~\n\n引入时注意不要添加pjax字样不然会进一个页面显示一次，未开启`pjax`的小伙伴不建议添加\n\n引入格式\n\n~~~tsx\n  bottom: #     \n      # 欢迎光临\n     - <script src=\"/js/hygl.js\"></script>\n~~~\n\n\n\n## 复制提示\n\n新建`fuzhi.js`\n\n~~~js\n/** 监听copy事件 */\ndocument.addEventListener(\"copy\",function(e){\n  //复制的内容\n  btf.snackbarShow('复制成功，请遵循GPL协议', false, 3000)\n})\n\n~~~\n\n引入格式 **注意：添加` data-pjax=\"\"` 负责可能会失效**\n\n~~~tsx\n  bottom: #     \n     # 复制提示\n     - <script charset=\"utf-8\" data-pjax=\"\" src=\"/js/fuzhi.js\"></script>\n~~~\n\n## F12提示\n\n开发者模式已打开，请遵循GPL协议\n\n可以添加到复制的js文件内 引入格式 **注意：添加` data-pjax=\"\"` 负责可能会失效**\n\n~~~js\n// 检测按键\nwindow.onkeydown = function (e) {\n  if (e.keyCode === 123) {\n    btf.snackbarShow('开发者模式已打开，请遵循GPL协议', false, 3000)\n  }\n}\n~~~\n\n## css\ncss修改默认小弹窗\n~~~css\n/* 消息弹窗 */\n.snackbar-container {\n    background: var(--heo-main) !important;\n    color: var(--heo-white) !important;\n    border-radius: 0 !important;\n    display: flex;\n    justify-content: center !important;\n    max-width: none !important;\n    min-width: 100% !important;\n    margin: 0px !important;\n    left: 0px !important;\n    height: 60px !important;\n    transform: none !important;\n  }\n  .snackbar-container p {\n    font-weight: bold !important;\n    text-align: center !important;\n    font-size: 0.8rem !important;\n    display: flex !important;\n    justify-content: center !important;\n  }\n  .snackbar-container .action {\n    color: var(--heo-white) !important;\n    padding: 4px 6px !important;\n    font-weight: bold;\n    border-radius: 8px !important;\n    transition: 0.3s;\n    border: var(--style-border) !important;\n  }\n  .snackbar-container .action:hover {\n    color: var(--heo-main) !important;\n    background: var(--heo-white) !important;\n  }\n  .snackbar-container::after {\n    position: absolute;\n    width: 0;\n    height: 100%;\n    left: 0;\n    top: 0;\n    background: var(--heo-white);\n    opacity: 0.1;\n    content: \"\";\n    animation: snackbar-progress 2s linear forwards;\n    pointer-events: none;\n  }\n  @keyframes snackbar-progress {\n    from {\n      width: 0;\n    }\n    to {\n      width: 100%;\n    }\n  }\n~~~\n<script>  \nfunction buttonClick(){  \n   btf.snackbarShow('快乐的一只沙雕点击了我的按钮看到了效果', false, 8000);  \n}  \n</script> ",
+      "data": {
+        "title": "hexo主题butterfly顶部复制提示弹窗",
+        "date": "2023-08-19 16:09:45",
+        "tags": [
+          "css"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "给全站添加复制提示弹窗，进站提示弹窗",
+      "fileName": "hexo主题butterfly顶部复制提示弹窗"
+    },
+    {
+      "content": "切换夜间暗黑模式后主题显示星空特效，并且还有流星\n<!-- more -->\n\n最近很多小伙伴留言想要星空和流星特效，于是写了这篇文章准备介绍如何部署。\n\n# 创建js文件\n\n1. 插入Canvas标签\n  首先打开Butterfly主题的`_config.yml`文件或者使用HTML直接插入，找到配置文件对应的`inject`部分\n\n  插入`<canvas id=\"universe\"></canvas>`\n\n2. 创建JS文件\n  在`butterfly/source/js/`创建一个`universe.js`文件，或者添加到自己的js文件中\n\n~~~js\nfunction dark() {window.requestAnimationFrame=window.requestAnimationFrame||window.mozRequestAnimationFrame||window.webkitRequestAnimationFrame||window.msRequestAnimationFrame;var n,e,i,h,t=.05,s=document.getElementById(\"universe\"),o=!0,a=\"180,184,240\",r=\"226,225,142\",d=\"226,225,224\",c=[];function f(){n=window.innerWidth,e=window.innerHeight,i=.216*n,s.setAttribute(\"width\",n),s.setAttribute(\"height\",e)}function u(){h.clearRect(0,0,n,e);for(var t=c.length,i=0;i<t;i++){var s=c[i];s.move(),s.fadeIn(),s.fadeOut(),s.draw()}}function y(){this.reset=function(){this.giant=m(3),this.comet=!this.giant&&!o&&m(10),this.x=l(0,n-10),this.y=l(0,e),this.r=l(1.1,2.6),this.dx=l(t,6*t)+(this.comet+1-1)*t*l(50,120)+2*t,this.dy=-l(t,6*t)-(this.comet+1-1)*t*l(50,120),this.fadingOut=null,this.fadingIn=!0,this.opacity=0,this.opacityTresh=l(.2,1-.4*(this.comet+1-1)),this.do=l(5e-4,.002)+.001*(this.comet+1-1)},this.fadeIn=function(){this.fadingIn&&(this.fadingIn=!(this.opacity>this.opacityTresh),this.opacity+=this.do)},this.fadeOut=function(){this.fadingOut&&(this.fadingOut=!(this.opacity<0),this.opacity-=this.do/2,(this.x>n||this.y<0)&&(this.fadingOut=!1,this.reset()))},this.draw=function(){if(h.beginPath(),this.giant)h.fillStyle=\"rgba(\"+a+\",\"+this.opacity+\")\",h.arc(this.x,this.y,2,0,2*Math.PI,!1);else if(this.comet){h.fillStyle=\"rgba(\"+d+\",\"+this.opacity+\")\",h.arc(this.x,this.y,1.5,0,2*Math.PI,!1);for(var t=0;t<30;t++)h.fillStyle=\"rgba(\"+d+\",\"+(this.opacity-this.opacity/20*t)+\")\",h.rect(this.x-this.dx/4*t,this.y-this.dy/4*t-2,2,2),h.fill()}else h.fillStyle=\"rgba(\"+r+\",\"+this.opacity+\")\",h.rect(this.x,this.y,this.r,this.r);h.closePath(),h.fill()},this.move=function(){this.x+=this.dx,this.y+=this.dy,!1===this.fadingOut&&this.reset(),(this.x>n-n/4||this.y<0)&&(this.fadingOut=!0)},setTimeout(function(){o=!1},50)}function m(t){return Math.floor(1e3*Math.random())+1<10*t}function l(t,i){return Math.random()*(i-t)+t}f(),window.addEventListener(\"resize\",f,!1),function(){h=s.getContext(\"2d\");for(var t=0;t<i;t++)c[t]=new y,c[t].reset();u()}(),function t(){document.getElementsByTagName('html')[0].getAttribute('data-theme')=='dark'&&u(),window.requestAnimationFrame(t)}()};\ndark()\n\n~~~\n\n代码最后这一部分要求**data-theme**也就是主题为**dark**暗色主题，因此仅在暗色主题生效，随后将**js**文件添加到配置文件的inject处或者其他需要的位置。\n\n# 创建css文件\n\n1. CSS样式 在 `[BlogRoot]/source/css` 目录下新建 `universe.css`，输入以下代码：\n\n~~~css\n/* 背景宇宙星光  */\n#universe{\n  display: block;\n  position: fixed;\n  margin: 0;\n  padding: 0;\n  border: 0;\n  outline: 0;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  pointer-events: none;\n  z-index: -1;\n}\n\n~~~\n# 引入文件\n1. 在主题配置文件`_config.butterfly.yml` 的 `inject` 配置项中 `bottom` 下填入：\n\n~~~ymd\ninject:\n  bottom:\n   - <canvas id=\"universe\"></canvas>\n   - <script defer src=\"/js/universe.js\"></script>\n~~~\n\n2. 在主题配置文件`_config.butterfly.yml` 的 `inject` 配置项中 `head` 下填入：\n\n~~~ymd\ninject:\n  head:\n   - <link rel=\"stylesheet\" href=\"/css/universe.css\">\n~~~\n\n本文部分转载于：[基于 Hexo 从零开始搭建个人博客（六）][1]\n\n\n  [1]: http://%E5%9F%BA%E4%BA%8E%20Hexo%20%E4%BB%8E%E9%9B%B6%E5%BC%80%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%EF%BC%88%E5%85%AD%EF%BC%89",
+      "data": {
+        "title": "主题butterfly如何让你的博客拥有星空背景和流星特效",
+        "date": "2023-02-19 16:10:50",
+        "tags": [
+          "美化"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "切换夜间暗黑模式后主题显示星空特效，并且还有流星",
+      "fileName": "主题butterfly如何让你的博客拥有星空背景和流星特效"
+    },
+    {
+      "content": "#### 1.首先需要注册一个 npm 的账号。访问[npm 注册页面](https://www.npmjs.com/signup/)\n\n<!-- more -->\n\n\n![](https://unpkg.com/shimail-img@1.0.0/0.1.png)\n\n完成邮箱验证，注册完成后进入账号管理界面:头像->Account，拉倒最上方，你会看到You have not verified your email address字样的提示，点击以后按提示步骤验证你的邮箱。\n\n![](https://unpkg.com/image-blog@1.0.1/02.png)\n\n#### 2.在电脑上新建一个文件夹（比如image-blog）\n\n进入文件夹\n\n```shell\nnpm init\n```\n\n进行初始化\n\n![](https://unpkg.com/image-blog@1.0.2/03.png)\n\n最后会输出一段 package.json，请求确认，输入 yes 即可。\n\n#### 3.然后输入发布指令，我们就可以把包发布到 npm 上了。\n\n```shell\nnpm publish\n```\n\n#### 4.jsdelivr+npm 的图片引用\n\n可以看到 Npm 只需要提供包名即可。这也是一开始要求包名不重复的原因之一\n\n```text\n【jsd出品，网宿国内节点】\nhttps://cdn.jsdelivr.net/npm/:package@:version/:file\n【unpkg 自建】\nhttps://cdn.cbd.int/:package@:version/:file\n```\n\n当然你也可以利用[unpkg](https://unpkg.com/)自建。(UNPKG 是一个内容源自 npm 的全球快速 CDN。它部署在 cloudflare 上，在大陆地区访问到的是香港节点。所以速度也不错。)\n\n```text\nhttps://unpkg.com/:package@:version/:file\n```\n\n#### 5.包的更新\n\n每次更新必须更新版本号，如1.0.0     必须向上才能发布\n\n```shell\nnpm config get registry // 你的是否是npm官方的源，不是请切回\nnpm config set registry https://registry.npmjs.org\nnpm whoami // 可以查看当前登录的npm用户\nnpm version patch//补丁版本，最后一位数加1 \nnpm version minor //增加了新功能 中间的数字加1 \nnpm version major //大改动，不向下兼容 第一位数字加1\n// 强制卸载\nnpm unpublish --force\n```\n\n注：大家也可以看看[鱼佬的文章](https://blog.anheyu.com/posts/72ea.html)\n\n",
+      "data": {
+        "title": "如何发布自己的npm包",
+        "date": "2023-01-20 16:07:51",
+        "tags": [
+          "npm"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "#### 1.首先需要注册一个 npm 的账号。访问[npm 注册页面](https://www.npmjs.com/signup/)",
+      "fileName": "page-npm"
+    },
+    {
+      "content": "# 一、下载安装\n本教程演示的环境：win 11 64位\n\n首先进入[nodejs](https://nodejs.org/en/)官网，或者直接点击[nodejs](https://nodejs.org/dist/v20.10.0/node-v20.10.0-x64.msi/)的进行下载（2023.12.27日），优先选择稳定版本，根据自己电脑系统配置进行下载适合的安装包\n\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/1.png)\n# 二、安装步骤\n1.傻瓜式安装即可（一直点击下一步 手动狗头😄）\n2.可以点击change按钮，安装到自己想要的位置（不修改默认位置也是可以的）。我安装到了X盘\n\n# 三、验证是否安装成功\nwin + r 打开运行框，输入cmd，进入终端，然后输入node -v 和 npm -v ，如果出现版本号就是安装成功了。如图：\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/2.png)\n\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/3.png)\n# 四、nodejs配置环境\n修改全局模块下载路径\n在nodejs根目录内新建两个文件夹 node_global 和 node_cache 如图：\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/4.png)\n\n创建完两个空文件夹之后，跟之前操作一样，在键盘按下【win+R】键，输入cmd，然后回车，进入终端，输入下面命令，然后回车即可。\n\n说明：\n\n管理员身份- 打开CMD，配置路径：（注意一定要管理员身份运行CMD！！！路径改成你自己的路径，不要无脑复制！！！）\n\nprefix = 创建的node_global文件夹所在路径\n\ncache = 创建的node_cache文件夹所在路径\n\n-------------------------------------------------------------------------------\n```shell\nnpm config set prefix \"X:\\nodejs\\node_global\"\nnpm config set cache \"X:\\nodejs\\node_cache\"\n```\n\n配置环境变量\n我的电脑”-右键-“属性”-“高级系统设置”-“高级”-“环境变量”\n\n进入环境变量对话框，在【系统变量】下新建【NODE_PATH】，\n\n输入【X:\\nodejs\\node_global】，并且在path路径中新增【X:\\nodejs\\】和【X:\\nodejs\\node_modules】\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/5.png)\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/6.png)\n\n将【用户变量】下的【Path】新增【X:\\nodejs\\node_global】和【X:\\nodejs\\node_global\\node_modules】\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/7.png)\n\n# 五、测试\n1.全局安装最常用的 express 模块 进行测试\n命令如下:\n```shell\nnpm install express -g\n```\n\n成功结果如下：\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/8.png)\n\n2.注：若执行命令npm install express -g 出现如下报错\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/9.png)\n是由于权限的原因，右击Nodejs文件夹->属性->安全，点击编辑，将所有权限都✔即可。\n\n建议全部用户都改成完全控制权限，别忘点应用，再点确认。\n![](https://cdn.shimail.cn/nodejs%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE%EF%BC%88%E9%80%82%E7%94%A8%E4%BA%8Ewindows%EF%BC%89/10.png)\n\n# 六、更换npm源为淘宝镜像\n因为npm默认下载服务器为国外，速度慢；故更换为国内淘宝镜源。\n\n注意一定要管理员身份运行CMD！！！\n```shell\nnpm config set registry https://registry.npm.taobao.org\n```\n\n# 安装 cpm （按需安装）\n```shell\nnpm install -g cnpm\n```\n\n我们也可以通过cnpm -v 来查看是否安装成功。\n\n安装后就可以使用cnpm安装模块了。\n\n切换回国外镜源\n```shell\nnpm config set registry https://registry.npmjs.org\n```\n\n查看当前镜源\n```shell\nnpm config get registry\n```\n\nnodejs的环境配置就到此结束了，因为当时自己也没少踩坑，所以借此交流\n结束，完结撒花😊",
+      "data": {
+        "title": "nodejs的安装及配置（适用于windows）",
+        "date": "2023-01-04 16:05:47",
+        "tags": [
+          "nodejs"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "nodejs-aza"
+    },
+    {
+      "content": "# hexo butterfly 养鱼来了\n\n<!-- more -->\n\n## js\n\n![](https://drfs.ctcontents.com/file/14237530/748136103/7083a7/img/wenzhang/fish.png)\n\n没有请创建 `blog/source/js/fishes.js` 写入\n\n```js\nfish();\nfunction fish() {\n  return (\n    $(\"footer\").append(\n      '<div class=\"container\" id=\"jsi-flying-fish-container\"></div>'\n    ),\n    $(\".container\").css({\n      width: \"100%\",\n      height: \"160px\",\n      margin: 0,\n      padding: 0,\n    }),\n    $(\"#footer-wrap\").css({\n      position: \"absolute\",\n      \"text-align\": \"center\",\n      top: 0,\n      right: 0,\n      left: 0,\n      bottom: 0,\n    }),\n    this\n  );\n}\nvar RENDERER = {\n  POINT_INTERVAL: 5,\n  FISH_COUNT: 2,\n  MAX_INTERVAL_COUNT: 50,\n  INIT_HEIGHT_RATE: 0.5,\n  THRESHOLD: 50,\n\n  init: function () {\n    this.setParameters();\n    this.reconstructMethods();\n    this.setup();\n    this.bindEvent();\n    this.render();\n  },\n  setParameters: function () {\n    this.$window = $(window);\n    this.$container = $(\"#jsi-flying-fish-container\");\n    this.$canvas = $(\"<canvas />\");\n    this.context = this.$canvas\n      .appendTo(this.$container)\n      .get(0)\n      .getContext(\"2d\");\n    this.points = [];\n    this.fishes = [];\n    this.watchIds = [];\n  },\n  createSurfacePoints: function () {\n    var count = Math.round(this.width / this.POINT_INTERVAL);\n    this.pointInterval = this.width / (count - 1);\n    this.points.push(new SURFACE_POINT(this, 0));\n\n    for (var i = 1; i < count; i++) {\n      var point = new SURFACE_POINT(this, i * this.pointInterval),\n        previous = this.points[i - 1];\n\n      point.setPreviousPoint(previous);\n      previous.setNextPoint(point);\n      this.points.push(point);\n    }\n  },\n  reconstructMethods: function () {\n    this.watchWindowSize = this.watchWindowSize.bind(this);\n    this.jdugeToStopResize = this.jdugeToStopResize.bind(this);\n    this.startEpicenter = this.startEpicenter.bind(this);\n    this.moveEpicenter = this.moveEpicenter.bind(this);\n    this.render = this.render.bind(this);\n  },\n  setup: function () {\n    this.points.length = 0;\n    this.fishes.length = 0;\n    this.watchIds.length = 0;\n    this.intervalCount = this.MAX_INTERVAL_COUNT;\n    this.width = this.$container.width();\n    this.height = this.$container.height();\n    this.fishCount =\n      (((this.FISH_COUNT * this.width) / 500) * this.height) / 500;\n    this.$canvas.attr({ width: this.width, height: this.height });\n\n    this.skyGradient = this.context.createLinearGradient(0, 0, 0, this.height);\n    this.skyGradient.addColorStop(0, \"hsl(180, 80%, 70%)\");\n    this.skyGradient.addColorStop(1, \"hsl(180, 80%, 90%)\");\n\n    this.seaGradient = this.context.createLinearGradient(0, 0, 0, this.height);\n    this.seaGradient.addColorStop(0, \"hsl(180, 80%, 60%)\");\n    this.seaGradient.addColorStop(0.5, \"hsl(180, 80%, 50%)\");\n    this.seaGradient.addColorStop(1, \"hsl(210, 80%, 50%)\");\n\n    this.fishes.push(new FISH(this));\n    this.createSurfacePoints();\n  },\n  watchWindowSize: function () {\n    this.clearTimer();\n    this.tmpWidth = this.$window.width();\n    this.tmpHeight = this.$window.height();\n    this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL));\n  },\n  clearTimer: function () {\n    while (this.watchIds.length > 0) {\n      clearTimeout(this.watchIds.pop());\n    }\n  },\n  jdugeToStopResize: function () {\n    var width = this.$window.width(),\n      height = this.$window.height(),\n      stopped = width == this.tmpWidth && height == this.tmpHeight;\n\n    this.tmpWidth = width;\n    this.tmpHeight = height;\n\n    if (stopped) {\n      this.setup();\n    }\n  },\n  bindEvent: function () {\n    this.$window.on(\"resize\", this.watchWindowSize);\n    this.$container.on(\"mouseenter\", this.startEpicenter);\n    this.$container.on(\"mousemove\", this.moveEpicenter);\n  },\n  getAxis: function (event) {\n    var offset = this.$container.offset();\n\n    return {\n      x: event.clientX - offset.left + this.$window.scrollLeft(),\n      y: event.clientY - offset.top + this.$window.scrollTop(),\n    };\n  },\n  startEpicenter: function (event) {\n    this.axis = this.getAxis(event);\n  },\n  moveEpicenter: function (event) {\n    var axis = this.getAxis(event);\n\n    if (!this.axis) {\n      this.axis = axis;\n    }\n    this.generateEpicenter(axis.x, axis.y, axis.y - this.axis.y);\n    this.axis = axis;\n  },\n  generateEpicenter: function (x, y, velocity) {\n    if (\n      y < this.height / 2 - this.THRESHOLD ||\n      y > this.height / 2 + this.THRESHOLD\n    ) {\n      return;\n    }\n    var index = Math.round(x / this.pointInterval);\n\n    if (index < 0 || index >= this.points.length) {\n      return;\n    }\n    this.points[index].interfere(y, velocity);\n  },\n  controlStatus: function () {\n    for (var i = 0, count = this.points.length; i < count; i++) {\n      this.points[i].updateSelf();\n    }\n    for (var i = 0, count = this.points.length; i < count; i++) {\n      this.points[i].updateNeighbors();\n    }\n    if (this.fishes.length < this.fishCount) {\n      if (--this.intervalCount == 0) {\n        this.intervalCount = this.MAX_INTERVAL_COUNT;\n        this.fishes.push(new FISH(this));\n      }\n    }\n  },\n  render: function () {\n    requestAnimationFrame(this.render);\n    this.controlStatus();\n\n    this.context.fillStyle = this.skyGradient;\n    this.context.fillRect(0, 0, this.width, this.height);\n    this.context.fillStyle = this.seaGradient;\n    this.context.beginPath();\n    this.context.moveTo(0, this.height);\n\n    for (var i = 0, count = this.points.length; i < count; i++) {\n      this.points[i].render(this.context);\n    }\n    this.context.lineTo(this.width, this.height);\n    this.context.closePath();\n    this.context.fill();\n\n    for (var i = 0, count = this.fishes.length; i < count; i++) {\n      this.fishes[i].render(this.context);\n    }\n  },\n};\nvar SURFACE_POINT = function (renderer, x) {\n  this.renderer = renderer;\n  this.x = x;\n  this.init();\n};\nSURFACE_POINT.prototype = {\n  SPRING_CONSTANT: 0.03,\n  SPRING_FRICTION: 0.9,\n  WAVE_SPREAD: 0.3,\n  ACCELARATION_RATE: 0.01,\n\n  init: function () {\n    this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE;\n    this.height = this.initHeight;\n    this.fy = 0;\n    this.force = { previous: 0, next: 0 };\n  },\n  setPreviousPoint: function (previous) {\n    this.previous = previous;\n  },\n  setNextPoint: function (next) {\n    this.next = next;\n  },\n  interfere: function (y, velocity) {\n    this.fy =\n      this.renderer.height *\n      this.ACCELARATION_RATE *\n      (this.renderer.height - this.height - y >= 0 ? -1 : 1) *\n      Math.abs(velocity);\n  },\n  updateSelf: function () {\n    this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height);\n    this.fy *= this.SPRING_FRICTION;\n    this.height += this.fy;\n  },\n  updateNeighbors: function () {\n    if (this.previous) {\n      this.force.previous =\n        this.WAVE_SPREAD * (this.height - this.previous.height);\n    }\n    if (this.next) {\n      this.force.next = this.WAVE_SPREAD * (this.height - this.next.height);\n    }\n  },\n  render: function (context) {\n    if (this.previous) {\n      this.previous.height += this.force.previous;\n      this.previous.fy += this.force.previous;\n    }\n    if (this.next) {\n      this.next.height += this.force.next;\n      this.next.fy += this.force.next;\n    }\n    context.lineTo(this.x, this.renderer.height - this.height);\n  },\n};\nvar FISH = function (renderer) {\n  this.renderer = renderer;\n  this.init();\n};\nFISH.prototype = {\n  GRAVITY: 0.4,\n\n  init: function () {\n    this.direction = Math.random() < 0.5;\n    this.x = this.direction\n      ? this.renderer.width + this.renderer.THRESHOLD\n      : -this.renderer.THRESHOLD;\n    this.y = this.getRandomValue(\n      (this.renderer.height * 6) / 10,\n      (this.renderer.height * 9) / 10\n    );\n    this.previousY = this.y;\n    this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1);\n    this.vy = this.getRandomValue(-5, -2);\n    this.ay = this.getRandomValue(-0.2, -0.05);\n    this.theta = 0;\n    this.phi = 0;\n    this.isOut = false;\n  },\n  getRandomValue: function (min, max) {\n    return min + (max - min) * Math.random();\n  },\n  controlStatus: function (context) {\n    this.previousY = this.y;\n    this.x += this.vx;\n    this.y += this.vy;\n    this.vy += this.ay;\n\n    if (this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE) {\n      this.vy += this.GRAVITY;\n      this.isOut = true;\n    } else {\n      if (this.isOut) {\n        this.ay = this.getRandomValue(-0.2, -0.05);\n      }\n      this.isOut = false;\n    }\n    if (!this.isOut) {\n      this.theta += Math.PI / 20;\n      this.theta %= Math.PI * 2;\n      this.phi += Math.PI / 30;\n      this.phi %= Math.PI * 2;\n    }\n    this.renderer.generateEpicenter(\n      this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD,\n      this.y,\n      this.y - this.previousY\n    );\n\n    if (\n      (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD) ||\n      (this.vx < 0 && this.x < -this.renderer.THRESHOLD)\n    ) {\n      this.init();\n    }\n  },\n  render: function (context) {\n    context.save();\n    context.translate(this.x, this.y);\n    context.rotate(Math.PI + Math.atan2(this.vy, this.vx));\n    context.scale(1, this.direction ? 1 : -1);\n\n    context.fillStyle = \"hsl(180, 30%, 80%)\";\n    context.beginPath();\n    context.moveTo(-30, 0);\n    context.bezierCurveTo(-20, 15, 15, 10, 40, 0);\n    context.bezierCurveTo(15, -10, -20, -15, -30, 0);\n    context.fill();\n\n    context.save();\n    context.translate(40, 0);\n    context.scale(0.9 + 0.2 * Math.sin(this.theta), 1);\n    context.fillStyle = \"hsl(180, 30%, 80%)\";\n    context.beginPath();\n    context.moveTo(0, 0);\n    context.quadraticCurveTo(5, 10, 20, 8);\n    context.quadraticCurveTo(12, 5, 10, 0);\n    context.quadraticCurveTo(12, -5, 20, -8);\n    context.quadraticCurveTo(5, -10, 0, 0);\n    context.fill();\n    context.restore();\n\n    context.save();\n    context.translate(-3, 0);\n    context.rotate(Math.PI / 3 + (Math.PI / 10) * Math.sin(this.phi));\n    context.fillStyle = \"hsl(220, 80%, 40%)\";\n    context.beginPath();\n    context.moveTo(-5, 0);\n    context.bezierCurveTo(-10, -10, -10, -30, 0, -40);\n    context.bezierCurveTo(12, -25, 8, -10, 0, 0);\n    context.closePath();\n    context.fill();\n    context.restore();\n\n    context.strokeStyle = \"hsl(220, 80%, 40%)\";\n    context.beginPath();\n    context.arc(-15, -3, 5, 0, Math.PI * 2, false);\n    context.stroke();\n\n    context.fillStyle = \"hsl(220, 80%, 40%)\";\n    context.beginPath();\n    context.arc(-15, -3, 3, 0, Math.PI * 2, false);\n    context.fill();\n    context.restore();\n\n    this.controlStatus(context);\n  },\n};\n$(function () {\n  RENDERER.init();\n});\n```\n\n## 配置\n\n### 开启 pjax\n\n`_configy.butterfly.yml` 相应位置修改\n\n\n\n```yaml\n\ninject:\n  head:\n  bottom:\n    - <script defer src=\"https://rmt.dogedoge.com/fetch/~/source/jsdelivr/npm/jquery@latest/dist/jquery.min.js\"></script>\n    - <script defer data-pjax src=\"/js/fishes.js\"></script>\n```\n\n### 未开启 pjax\n\n`_configy.butterfly.yml` 相应位置修改\n\n```yaml\ninject:\n  head:\n  bottom:\n    - <script defer src=\"https://rmt.dogedoge.com/fetch/~/source/jsdelivr/npm/jquery@latest/dist/jquery.min.js\"></script>\n    - <script defer src=\"/js/fishes.js\"></script>\n```\n\n# 前言\n\n**页脚养鱼**效果我也是折腾了蛮久的，奈何自己太菜，出现了一些问题也不知道怎么解决，查询一些博客，相关的描述也很简单。这里参考了`Ln`大佬的博客，总算是搞定了。\n\n> Ln’s Blog ——《如何在页脚养鱼》：https://weilining.github.io/204.html\n\n最终效果在本站页脚，向下滑动即可看到。\n\n------\n\n# 操作方法\n\n参考文章一共介绍了两种方法，第一种是有针对于`Butterfly`主题的修改。第二种方法是通用方法（其他也主题可参考）\n\n## 方法一\n\n打开站点的主题配置文件`_config.butterfly.yml`，找到`inject`，在`bottom`处直接引入以下链接：\n\n```\n- <script src=\"https://gcore.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js\"></script>\n```\n\n## 方法二\n\n1. 找到`footer.pug`文件：`\\themes\\butterfly\\layout\\includes\\footer.pug`，写入以下内容：\n\n   ```\n   #jsi-flying-fish-container.container\n      script(src='js/fish.js')\n   style.\n      \n          @media only screen and (max-width: 767px){\n          #sidebar_search_box input[type=text]{width:calc(100% - 24px)}\n       }\n   ```\n\n2. 打开站点的主题配置文件`_config.butterfly.yml`，找到`inject`，在`bottom`处直接引入https://gcore.jsdelivr.net/gh/xiabo2/CDN@latest/fish.js\n\n   ```\n   - <script src=\"https://gcore.jsdelivr.net/gh/xiabo2/CDN@latest/fish.js\"></script>\n   ```\n\n   **注意**：引入的js文件需要依赖`jquery`，所以在之前如果没有引用过的就需要在`bottom`处的最开始引入：\n\n   ```\n   - <script src=\"https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js\"></script>\n   ```\n\n3. 这样效果就出现了。但是引入之后页脚会过高，需要修改`footer.styl`文件：`\\themes\\butterfly\\source\\css\\_layout\\footer.styl`:\n\n   ```\n   #footer\n     position: relative\n     background: $light-blue\n     background-attachment: local\n     background-position: bottom\n     background-size: cover\n   \n     if hexo-config('footer_bg') != false\n       &:before\n         position: absolute\n         width: 100%\n         height: 100%\n         background-color: alpha($dark-black, .1) \n         content: ''\n   \n   #footer-wrap\n     position: absolute\n     padding: 1.2rem 1rem 1.4rem\n     color: var(--light-grey)\n     text-align: center\n     left: 0\n     right: 0\n     top: 0\n     bottom: 0\n   \n     a\n       color: var(--light-grey)\n   \n       &:hover\n         text-decoration: underline\n   \n     .footer-separator\n       margin: 0 .2rem\n   \n     .icp-icon\n       padding: 0 4px\n       vertical-align: text-bottom\n       max-height: 1.4em\n       width auto\n   ```\n\n4. 参考文章的技术流程写到这里就结束了，如果还有页脚文字被遮挡的情况，可以修改页脚的透明度，在`\\themes\\butterfly\\source\\css`路径下创建一个`xxx.css`文件，在文件中添加如下代码：\n\n   - 页脚半透明\n\n     ```\n     /* 页脚半透明 */\n     #footer {\n         background: rgba(255, 255, 255, 0);\n         color: #000;\n         border-top-right-radius: 20px;\n         border-top-left-radius: 20px;\n         backdrop-filter: saturate(100%) blur(5px)\n     }\n     \n     #footer::before {\n         background: rgba(255,255,255,0)\n     }\n     \n     #footer #footer-wrap {\n         color: var(--font-color);\n     }\n     \n     #footer #footer-wrap a {\n         color: var(--font-color);\n     }\n     ```\n\n   - 页脚全透明\n\n     ```\n     /* 页脚透明 */\n     #footer {\n         background: transparent !important;\n     }\n     ```\n\n   然后将该文件引入到`inject`的`head`处：\n\n   ```\n   - <link rel=\"stylesheet\" href=\"/css/xxx.css\">\n   ```\n\n5. 至此操作结束，去看看你的页脚有没有发生变化吧。\n\n## 补充\n\n还有一个更为简单的方法，引入带有颜色的页脚养鱼，效果如下：\n\n![img](https://drfs.ctcontents.com/file/14237530/748136103/7083a7/img/wenzhang/fish.png)\n\n只需要在`_config.butterfly.yml`文件中，找到`inject`，在`bottom`处直接引入：https://blog.4t.pw/js/wz/fishes.js\n\n```\n- <script defer src=\"https://blog.4t.pw/js/wz/fishes.js\"></script> # 页脚养鱼(彩色)\n```\n\n**注意**：该操作同样需要在之前引入`jquery`。\n\n------\n\n# 结尾\n\n在魔改的道路上乐此不疲，虽然有时真的很“崩溃”。",
+      "data": {
+        "title": "butterfly版权栏养个鱼",
+        "date": "2022-10-04 16:14:26",
+        "tags": [
+          "美化"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "# hexo butterfly 养鱼来了",
+      "fileName": "butterfly版权栏养个鱼"
+    },
+    {
+      "content": "| 插件                         | 功能                                                    | 文档链接                                                     |\n| ---------------------------- | ------------------------------------------------------- | ------------------------------------------------------------ |\n| hexo-generator-index-pin-top | 文章置顶                                                | https://github.com/netcan/hexo-generator-index-pin-top       |\n| hexo-wordcount               | 文章字数统计和阅读时长统计                              | https://github.com/willin/hexo-wordcount                     |\n| hexo-abbrlink                | 生成URL短链接                                           | https://github.com/rozbo/hexo-abbrlink                       |\n| hexo-lazyload-image          | 图片懒加载                                              | https://github.com/Troy-Yang/hexo-lazyload-image             |\n| hexo-generator-baidu-sitemap | 生成baidusitemap.xml                                    | https://github.com/coneycode/hexo-generator-baidu-sitemap    |\n| hexo-generator-sitemap       | 生成sitemap.xml                                         | https://github.com/hexojs/hexo-generator-sitemap             |\n| hexo-generator-feed          | 生成RSS文件                                             | https://github.com/hexojs/hexo-generator-feed                |\n| hexo-external-link           | 外链跳转                                                | https://github.com/hvnobug/hexo-external-link                |\n| hexo-autonofollow            | 自动对外部链接增加nofollow属性                          | https://github.com/liuzc/hexo-autonofollow                   |\n| hexo-filter-nofollow         | 为外链添加`rel=\"noopener external nofollow noreferrer\"` | https://github.com/hexojs/hexo-filter-nofollow               |\n| hexo-prism-plugin            | 代码高亮                                                | https://github.com/ele828/hexo-prism-plugin                  |\n| hexo-neat                    | 博客压缩                                                | https://github.com/rozbo/hexo-neat                           |\n| hexo-allminifier             | 博客压缩                                                | https://developer.aliyun.com/mirror/npm/package/hexo-all-minifier |\n| hexo-tag-aplayer             | aplayer音乐播放器                                       | https://github.com/MoePlayer/hexo-tag-aplayer                |\n| hexo-tag-dplayer             | dplayer视频播放器                                       | https://github.com/MoePlayer/hexo-tag-dplayer                |\n| hexo-douban                  | 添加豆瓣读书，电影，游戏页面                            | https://github.com/mythsman/hexo-douban                      |\n| hexo-generator-searchdb      | 本地搜索,生成search.xml                                 | https://github.com/theme-next/hexo-generator-searchdb        |\n| hexo-algoliasearch           | 搜索系统                                                | https://github.com/LouisBarranqueiro/hexo-algoliasearch      |\n| hexo-algolia                 | 搜索系统                                                | https://github.com/oncletom/hexo-algolia                     |\n| hexo-generator-search        | 本地搜索系统                                            | https://github.com/wzpan/hexo-generator-search               |\n| hexo-baidu-url-submit        | 百度站长主动推送                                        | https://github.com/huiwang/hexo-baidu-url-submit             |\n| hexo-offline                 | 开启PWA                                                 | https://github.com/JLHwung/hexo-offline                      |\n| hexo-pwa                     | 开启PWA                                                 | https://github.com/lavas-project/hexo-pwa                    |\n| hexo-helper-live2d           | 看板娘                                                  | https://github.com/EYHN/hexo-helper-live2d                   |\n| hexo-addlink                 | 文末添加当前文章链接和版权声明                          | https://github.com/acwong00/hexo-addlink                     |\n| hexo-blog-encrypt            | 博客文章加密                                            | https://github.com/MikeCoder/hexo-blog-encrypt               |\n| hexo-simple-mindmap          | 博客添加脑图                                            | https://github.com/HunterXuan/hexo-simple-mindmap            |\n| hexo-pdf                     | 博客展示pdf                                             | https://github.com/superalsrk/hexo-pdf                       |\n| hexo-tag-echarts             | 博客添加图表                                            | https://github.com/zhoulvjun/hexo-tag-echarts                |\n| hexo-steam-games             | 添加Steam游戏界面                                       | https://github.com/HCLonely/hexo-steam-games                 |\n| hexo-bilibili-bangumi        | 添加bilibili番剧页面                                    | https://github.com/HCLonely/hexo-bilibili-bangumi            |\n| hexo-generator-random        | 生成随机文章页面                                        | https://github.com/Drew233/hexo-generator-random             |\n| hexo-web-push-notification   | web推送插件                                             | https://github.com/glazec/hexo-web-push-notification         |\n\n",
+      "data": {
+        "title": "Hexo插件推荐",
+        "date": "2022-09-01 16:13:24",
+        "tags": [
+          "hexo"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "Hexo插件推荐"
+    },
+    {
+      "content": "> 欢迎来到我的小站呀，很高兴遇见你！🤝\n\n## 🏠 关于本站\n\n## 👨‍💻 博主是谁\n\n## ⛹ 兴趣爱好\n\n## 📬 联系我呀\n",
+      "data": {
+        "title": "关于",
+        "date": "2019-01-25 19:09:48",
+        "tags": null,
+        "published": true,
+        "hideInList": true,
+        "feature": null,
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "",
+      "fileName": "about"
+    },
+    {
+      "content": "👏  欢迎使用 **Gridea** ！  \n✍️  **Gridea** 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ... \n\n<!-- more -->\n\n[Github](https://github.com/getgridea/gridea)  \n[Gridea 主页](https://gridea.dev/)  \n[示例网站](https://fehey.com/)\n\n## 特性👇\n📝  你可以使用最酷的 **Markdown** 语法，进行快速创作  \n\n🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片  \n\n🏷️  你可以对文章进行标签分组  \n\n📋  你可以自定义菜单，甚至可以创建外部链接菜单  \n\n💻  你可以在 **Windows**，**MacOS** 或 **Linux** 设备上使用此客户端  \n\n🌎  你可以使用 **𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌** 或 **Coding Pages** 向世界展示，未来将支持更多平台  \n\n💬  你可以进行简单的配置，接入 [Gitalk](https://github.com/gitalk/gitalk) 或 [DisqusJS](https://github.com/SukkaW/DisqusJS) 评论系统  \n\n🇬🇧  你可以使用**中文简体**或**英语**  \n\n🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力  \n\n🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步  \n\n🌱 当然 **Gridea** 还很年轻，有很多不足，但请相信，它会不停向前 🏃\n\n未来，它一定会成为你离不开的伙伴\n\n尽情发挥你的才华吧！\n\n😘 Enjoy~\n",
+      "data": {
+        "title": "Hello Gridea",
+        "date": "2018-12-12 00:00:00",
+        "tags": [
+          "Gridea"
+        ],
+        "published": true,
+        "hideInList": false,
+        "feature": "/post-images/hello-gridea.png",
+        "isTop": false
+      },
+      "isEmpty": false,
+      "excerpt": "",
+      "abstract": "👏  欢迎使用 **Gridea** ！  \n✍️  **Gridea** 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ... ",
+      "fileName": "hello-gridea"
+    }
+  ],
+  "tags": [
+    {
+      "name": "git",
+      "slug": "NxarVVQgKj",
+      "used": true
+    },
+    {
+      "name": "api",
+      "slug": "nV7Fiqewgm8",
+      "used": true
+    },
+    {
+      "name": "github",
+      "slug": "S8Y6EXcfeWd",
+      "used": true
+    },
+    {
+      "name": "typecho",
+      "slug": "B8F4Yr3V0Ur",
+      "used": true
+    },
+    {
+      "name": "handsome",
+      "slug": "45ejBfncc56",
+      "used": true
+    },
+    {
+      "name": "禁用",
+      "slug": "n6I8Q7c6SLT",
+      "used": true
+    },
+    {
+      "name": 404,
+      "slug": "gu-qzn9-6Y1",
+      "used": true
+    },
+    {
+      "name": "美化",
+      "slug": "mVZFtxzg8yY",
+      "used": true
+    },
+    {
+      "name": "ip",
+      "slug": "I_i5qSF_W5Z",
+      "used": true
+    },
+    {
+      "name": "右键",
+      "slug": "BTADrNeHala",
+      "used": true
+    },
+    {
+      "name": "插件",
+      "slug": "wCzBljZduKl",
+      "used": true
+    },
+    {
+      "name": "css",
+      "slug": "d1dMO-tnF7F",
+      "used": true
+    },
+    {
+      "name": "npm",
+      "slug": "f3IO82kKKm4",
+      "used": true
+    },
+    {
+      "name": "nodejs",
+      "slug": "rXnYfFsvGy7",
+      "used": true
+    },
+    {
+      "name": "hexo",
+      "slug": "i5E3bUB4Ls",
+      "used": true
+    },
+    {
+      "name": "Gridea",
+      "slug": "PQxjGafafn",
+      "used": true
+    }
+  ],
+  "menus": [
+    {
+      "link": "/",
+      "name": "首页",
+      "openType": "Internal"
+    },
+    {
+      "link": "/archives",
+      "name": "归档",
+      "openType": "Internal"
+    },
+    {
+      "link": "/tags",
+      "name": "标签",
+      "openType": "Internal"
+    },
+    {
+      "link": "/about",
+      "name": "关于",
+      "openType": "Internal"
+    }
+  ]
+}

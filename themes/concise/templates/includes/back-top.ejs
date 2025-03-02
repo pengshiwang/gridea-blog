@@ -1,0 +1,113 @@
+<style>
+  .rightMenu {
+    position: fixed;
+    right: 26px;
+    bottom: 50px;
+    z-index: 9;
+    color: #fff;
+    font-size: 19px;
+  }
+
+  :where(
+    .back-to-top,
+    .set-up,
+    .theme-switching
+  ) {
+    width: 45px;
+    height: 35px;
+    background-color: rgb(85, 104, 246, .5);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 4px;
+    margin-block-start: 4px !important;
+    cursor: pointer;
+  }
+
+  .hideRightMenu {
+    display: none;
+  }
+
+</style>
+
+<div class="rightMenu">
+  <!-- 菜单 -->
+  <div class="hideRightMenu">
+    <!-- 切换主题 -->
+    <div class="theme-switching">
+      <i class="fa-solid fa-sun-bright"></i>
+      <!-- <i class="fa-solid fa-moon"></i> -->
+    </div>
+  </div>
+  <!-- 设置 -->
+  <div class="set-up">
+    <i class="fa-regular fa-gear"></i>
+  </div>
+  <!-- 返回顶部 -->
+  <div class="back-to-top top" style="display: none">
+    <i class="fa-solid fa-arrow-up-to-line"></i>
+  </div>
+</div>
+
+<script>
+// 返回顶部
+$('.back-to-top').click(function () {
+  $('html,body').stop().animate({ 
+    scrollTop: 0 
+  }, '0.2s cubic-bezier(1, 0.14, 1, 0.56)');
+});
+
+$(function() {
+  // 主题手动切换
+  $(".theme-switching").click(function (e) { 
+    e.preventDefault();
+
+    if ($("html").attr("data-theme") === 'light') {
+      $("html").attr("data-theme", ColorScheme(true));
+    } else {
+      $("html").attr("data-theme", ColorScheme(false));
+    }
+  })
+
+  ColorScheme(window.matchMedia('(prefers-color-scheme: dark)').matches)
+
+  window.onload = function () {
+    $("html").attr("data-theme", Cookies.get("data-theme"));
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener("change", event => {
+      ColorScheme(event.matches)
+    });
+
+    if (Cookies.get("data-theme") === 'light') {
+      themeSwitching(false)
+    } else {
+      themeSwitching(true)
+    }
+  }
+
+  // 主题自动切换
+  function ColorScheme(judgment) {
+    if (judgment) {
+      // console.log("dark");
+      Cookies.set("data-theme", "dark");
+      $("html").attr("data-theme", "dark");
+      themeSwitching(judgment)
+    } else {
+      // console.log("light");
+      Cookies.set("data-theme", "light");
+      $("html").attr("data-theme", "light");
+      themeSwitching(judgment)
+    }
+  }
+
+  function themeSwitching(isTheme) {
+    if (isTheme) {
+      // 太阳
+      $(".theme-switching i").removeClass('fa-moon').addClass('fa-sun-bright')
+    } else {
+      // 月亮
+      $(".theme-switching i").removeClass('fa-sun-bright').addClass('fa-moon')
+    }
+  }
+})
+</script>

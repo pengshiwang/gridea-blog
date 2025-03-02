@@ -1,0 +1,38 @@
+// 小屏幕
+@ant-transition-duration: 300ms;
+@ant-transition-timing-function: cubic-bezier(0.59, 0.19, 0.68, 0.69);
+@ant-transition-property: all;
+
+:where(
+  .ant-layout-sider-light,
+  .scroll-bar
+) {
+  _transition-duration: @ant-transition-duration;
+  _transition-timing-function: @ant-transition-timing-function;
+  _transition-property: @ant-transition-property;
+}
+
+@media (max-width: 750px) {
+
+  .ant-layout {
+
+    // .ant-layout-sider-light 
+    .ant-layout-sider-light {
+      margin-inline-start: calc(-@ant-layout-width + -10px);
+      background-color: white;
+      z-index: 2;
+    }
+
+    // .scroll-bar 
+    .scroll-bar {
+      width: calc(100%);
+      margin-inline-start: 0;
+    }
+
+    // .ant-small-menu
+    .ant-small-menu {
+      display: block;
+    }
+  
+  }
+}

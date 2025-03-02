@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html 
+  lang="<%- site.customConfig.lang ? site.customConfig.lang : "en" %>" 
+  data-theme="<%- site.customConfig.theme ? site.customConfig.theme : "light" %>"
+>
+<head>
+  <%- include('./includes/head', { siteTitle: themeConfig.siteName }) %>
+</head>
+<body>
+  <div class="__next">
+    <section class="ant-layout">
+      <!-- 菜单栏 -->
+      <%- include('./includes/header') %>
+      
+      <!-- 内容 -->
+      <main class="ant-layout-content scroll-bar main">
+        <div class="ant-tags-container">
+          <div class="ant-tags">
+            <h2 class="ant-tags-title">标签</h2>
+            <div class="ant-tag-list">
+              <% tags.forEach((tag) => { %>
+                <a class="ant-tag" href="<%= tag.link %>"><%= tag.name %></a>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </main>
+      <%- include('./includes/small') %>
+    </section>
+    <%- include('./includes/back-top') %> 
+    <!-- <%- include('./includes/load.ejs') %> -->
+  </div>
+</body>
+</html>

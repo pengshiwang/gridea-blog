@@ -1,0 +1,61 @@
+{
+  "config": {
+    "archivesPageSize": 50,
+    "archivesPath": "archives",
+    "dateFormat": "YYYY-MM-DD",
+    "feedCount": 10,
+    "feedFullText": false,
+    "footerInfo": "Powered by <a href=\"https://github.com/getgridea/gridea\" target=\"_blank\">Gridea</a>",
+    "postPageSize": 10,
+    "postPath": "",
+    "postUrlFormat": "SHORT_ID",
+    "showFeatureImage": true,
+    "siteDescription": "温故而知新",
+    "siteName": "吾爱互联",
+    "tagPath": "",
+    "tagUrlFormat": "SHORT_ID",
+    "themeName": "smartisan"
+  },
+  "customConfig": {
+    "add_friend": [
+      {
+        "friend_link": "https://www.shimail.cn",
+        "friend_name": "皓月星际"
+      },
+      {
+        "friend_link": "https://www.wsp.im",
+        "friend_name": "回忆录"
+      }
+    ],
+    "add_home_adv": [],
+    "author": "秋溟",
+    "description": "",
+    "icp": "",
+    "is_friends": true,
+    "is_home_adv": false,
+    "is_mp": false,
+    "is_reward": false,
+    "is_sitename": true,
+    "is_sns": true,
+    "logo": "",
+    "media_platform": "",
+    "security": "",
+    "security_url": "",
+    "sns_bilibili": "",
+    "sns_csdn": "",
+    "sns_douban": "",
+    "sns_facebook": "",
+    "sns_github": "https://github.com/wsp03",
+    "sns_jianshu": "",
+    "sns_juejin": "",
+    "sns_qq": "",
+    "sns_sf": "",
+    "sns_toutiao": "",
+    "sns_twitter": "",
+    "sns_wechat": "",
+    "sns_weibo": "",
+    "sns_zhihu": "",
+    "weixin_reward": "",
+    "zhifubao_reward": ""
+  }
+}

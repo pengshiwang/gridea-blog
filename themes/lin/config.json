@@ -1,0 +1,129 @@
+{
+  "name": "凛",
+  "version": "1.0",
+  "author": "Apa琦",
+  "repository": "",
+  "customConfig": [
+    {
+      "name": "indeximg",
+      "label": "首页图片",
+      "group": "首页",
+      "value": "/media/img/centerbg.jpg",
+      "type": "input",
+      "note": "请输入图片地址"
+    },
+    {
+      "name": "tajs",
+      "label": "腾讯分析js链接",
+      "group": "首页",
+      "value": "",
+      "type": "input",
+      "note": "请输入腾讯分析代码"
+    },
+    {
+      "name": "route",
+      "label": "静态资源路径",
+      "group": "首页",
+      "value": "/",
+      "type": "input",
+      "note": "如果您的网站在子目录请改为 /xxxx"
+    },
+      {
+        "name": "steam",
+        "label": "steam",
+        "group": "社交",
+        "value": "",
+        "type": "input",
+        "note": "链接地址"
+      },
+      {
+        "name": "github",
+        "label": "Github",
+        "group": "社交",
+        "value": "",
+        "type": "input",
+        "note": "链接地址"
+      },
+      {
+        "name": "zhihu",
+        "label": "知乎",
+        "group": "社交",
+        "value": "",
+        "type": "input",
+        "note": "链接地址"
+      },
+      {
+        "name": "qq",
+        "label": "QQ",
+        "group": "社交",
+        "value": "",
+        "type": "input",
+        "note": "链接地址"
+      },
+      {
+        "name": "weibo",
+        "label": "微博",
+        "group": "社交",
+        "value": "",
+        "type": "input",
+        "note": "链接地址"
+      },
+    {
+      "name": "bilibili",
+      "label": "bilibili",
+      "group": "社交",
+      "value": "",
+      "type": "input",
+      "note": "链接地址"
+    },
+    {
+      "name": "wangyiyun",
+      "label": "网易云音乐",
+      "group": "社交",
+      "value": "",
+      "type": "input",
+      "note": "链接地址"
+    },
+    {
+      "name": "qidian",
+      "label": "起点中文网",
+      "group": "社交",
+      "value": "",
+      "type": "input",
+      "note": "链接地址"
+    },
+      {
+        "name": "is_comment",
+        "label": "是否显示评论",
+        "group": "评论",
+        "value": true,
+        "type": "switch",
+        "note": "基于leancloud的评论"
+      },
+      {
+        "name": "app_id",
+        "label": "AppID",
+        "group": "评论",
+        "value": "",
+        "type": "input",
+        "note": "leancloud的appid"
+      },
+      {
+        "name": "app_key",
+        "label": "AppKey",
+        "group": "评论",
+        "value": "",
+        "type": "input",
+        "note": "leancloud的appkey"
+      },
+      {
+        "name": "rest_api",
+        "label": "REST API",
+        "group": "评论",
+        "value": "",
+        "type": "input",
+        "note": "leancloud的restApi"
+      }
+
+]
+}
